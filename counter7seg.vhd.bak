@@ -1,0 +1,157 @@
+library ieee;
+
+use ieee.std_logic_1164.all;
+
+--use ieee.std_logic_arith.all;  -- déconseillée non ieee
+
+--use ieee.numeric_std.all;
+
+use ieee.std_logic_unsigned.all;  -- déconseillée non ieee
+
+
+
+entity counter7seg is  
+
+PORT (
+
+  rst, CLK : IN std_logic ;
+
+        Seg : OUT std_logic_vector (7 downto 0) 
+
+          );
+
+END counter7seg ;
+
+
+
+
+
+ARCHITECTURE arch OF counter7seg IS
+
+
+
+SIGNAL cnt : std_logic_vector(3 downto 0);
+
+SIGNAL count : natural range 0 to 25000000 :=0 ;
+
+signal clk1hz : std_logic :='0';
+
+
+
+
+
+BEGIN
+
+
+
+PROCESS (clk)           -- process clock div
+
+BEGIN
+
+if (clk'EVENT AND clk='1') then
+
+count <= count +1;
+
+  if count=25000000-1 then
+
+    clk1hz <= not clk1hz;
+
+    count<=0;
+
+  end if;
+
+end if;
+
+END PROCESS ;
+
+
+
+
+
+PROCESS (clk1hz,rst)    --  process couter
+
+BEGIN
+
+if rst ='0' then
+
+ cnt <= (others => '0') ;
+
+elsif (clk1’hzEVENT AND clk1hz='1')
+
+THEN 
+
+if cnt="1001" then
+
+  cnt <=(others =>'0');
+
+else 
+
+cnt <= cnt + 1;
+
+end if;
+
+END IF ;
+
+END PROCESS ;
+
+
+
+Process (cnt)    -- process display
+
+Begin
+
+Case cnt is 
+
+When “0000’ => seg <= “1100 0000”;    — 0   check
+
+When “0001’ => seg <= “1011 1001”;     — 1
+
+When “0010’ => seg <= “1010 0100”;    — 2
+
+When “0011’ => seg <= “1011 0000”;    — 3
+
+When “0100’ => seg <= “1001 1001”;    — 4
+
+When “0101’ => seg <= “1001 0010”;    — 5
+
+When “0110’ => seg <= “1000 0010”;    — 6
+
+When “0111’ => seg <= “1011 1000”;     — 7
+
+When “1000’ => seg <= “1000 0000”;    —8 
+
+When “1001’ => seg <= “1001 0000”;    — 9
+
+When others => seg <= “11111111”;
+
+End process;
+
+END arch;
+
+
+#############################################
+Pin planner
+#############################################
+
+rst  -- PIN_B8
+clk -- PIN_P11
+
+seg(0)  -- PIN_C14
+
+seg(1) -- PIN_E15
+
+seg(2)  -- PIN_C15
+
+seg(3)  -- PIN_C16
+
+seg(4)  -- PIN_E16
+
+seg(5) -- PIN_D17
+
+seg(6) -- PIN_C17
+
+seg(7) -- PIN_D15
+
+
+
+

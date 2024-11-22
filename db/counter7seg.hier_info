@@ -1,0 +1,41 @@
+|counter7seg
+rst => cnt[0].ACLR
+rst => cnt[1].ACLR
+rst => cnt[2].ACLR
+rst => cnt[3].ACLR
+CLK => clk1hz.CLK
+CLK => count[0].CLK
+CLK => count[1].CLK
+CLK => count[2].CLK
+CLK => count[3].CLK
+CLK => count[4].CLK
+CLK => count[5].CLK
+CLK => count[6].CLK
+CLK => count[7].CLK
+CLK => count[8].CLK
+CLK => count[9].CLK
+CLK => count[10].CLK
+CLK => count[11].CLK
+CLK => count[12].CLK
+CLK => count[13].CLK
+CLK => count[14].CLK
+CLK => count[15].CLK
+CLK => count[16].CLK
+CLK => count[17].CLK
+CLK => count[18].CLK
+CLK => count[19].CLK
+CLK => count[20].CLK
+CLK => count[21].CLK
+CLK => count[22].CLK
+CLK => count[23].CLK
+CLK => count[24].CLK
+Seg[0] <= Mux6.DB_MAX_OUTPUT_PORT_TYPE
+Seg[1] <= Mux5.DB_MAX_OUTPUT_PORT_TYPE
+Seg[2] <= Mux4.DB_MAX_OUTPUT_PORT_TYPE
+Seg[3] <= Mux3.DB_MAX_OUTPUT_PORT_TYPE
+Seg[4] <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+Seg[5] <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+Seg[6] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+Seg[7] <= <VCC>
+
+
